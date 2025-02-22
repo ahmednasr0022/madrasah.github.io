@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المدرسة الثانوية الفندقية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35; /* Vibrant orange */
+            --secondary: #2D2D2D; /* Dark gray */
+            --light: #FFFFFF;
+            --bg: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--secondary);
+            line-height: 1.8;
+        }
+
+        /* Modern Header */
+        .header {
+            background: var(--light);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 0.5rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Modern Navigation */
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--secondary);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.8)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            animation: slideUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: slideUp 1.2s ease;
+        }
+
+        /* Programs Section */
+        .programs {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .program-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Facilities Section */
+        .facilities {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .facility-card {
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .facility-card:hover {
+            transform: scale(1.05);
+        }
+
+        .facility-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--light);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            color: var(--light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">المدرسة الثانوية الفندقية</div>
+            <nav class="nav">
+                <a href="#programs">البرامج</a>
+                <a href="#facilities">المرافق</a>
+                <a href="#contact">تواصل معنا</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>التميز في التعليم الفندقي</h1>
+            <p>نُعد قادة المستقبل في صناعة الضيافة العالمية من خلال برامج تعليمية مبتكرة</p>
+            <!--<button class="cta-button">اكتشف برامجنا</button>-->
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs" id="programs">
+        <h2 class="section-title">برامجنا التعليمية</h2>
+        <div class="program-grid">
+            <div class="program-card">
+                <i class="fas fa-concierge-bell program-icon"></i>
+                <h3>إدارة الفنادق</h3>
+                <p>برنامج متكامل في إدارة العمليات الفندقية والخدمات</p>
+            </div>
+            <div class="program-card">
+                <i class="fas fa-concierge-bell program-icon"></i>
+                <h3>المطبخ</h3>
+                <p>برنامج متكامل في الطبخ</p>
+            </div>
+            <div class="program-card">
+                <i class="fas fa-concierge-bell program-icon"></i>
+                <h3>المطعم</h3>
+                <p>برنامج متكامل في التعامل مع العملاء و المطاعم</p>
+            </div>
+            <div class="program-card">
+                <i class="fas fa-concierge-bell program-icon"></i>
+                <h3>إشراف الغرف</h3>
+                <p>برنامج متكامل في اشراف الغرف</p>
+            </div>
+            <!-- Add more program cards -->
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="facilities" id="facilities">
+        <h2 class="section-title">مرافقنا الحديثة</h2>
+        <div class="facility-grid">
+            <div class="facility-card">
+                <img src="kitchen.jpg" class="facility-image" alt="مطبخ تدريبي">
+                <h3>مطابخ احترافية</h3>
+                <p>مجهزة بأحدث الأجهزة العالمية</p>
+            </div>
+            <div class="facility-card">
+                <img src="rest.jpg" class="facility-image" alt="مطبخ تدريبي">
+                <h3>مطاعم مجهزة</h3>
+                <p>مجهزة بأحدث الأدوات العالمية</p>
+            </div>
+            <div class="facility-card">
+                <img src="room.jpg" class="facility-image" alt="مطبخ تدريبي">
+                <h3>غرف تدريبة</h3>
+                <p>مجهزة بأحدث الأجهزة العالمية</p>
+            </div>
+            <!-- Add more facility cards -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">تواصل معنا</h2>
+        <form class="contact-form">
+            <input type="text" class="form-input" placeholder="الاسم الكامل">
+            <input type="email" class="form-input" placeholder="البريد الإلكتروني">
+            <textarea class="form-input" rows="5" placeholder="رسالتك"></textarea>
+            <button type="submit" class="cta-button">إرسال الرسالة</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=100095350955236" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <!-- Add other social links -->
+        </div>
+        <p>© 2024 المدرسة الثانوية الفندقية. جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.program-card, .facility-card').forEach((el) => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(50px)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
